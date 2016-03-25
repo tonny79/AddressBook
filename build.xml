@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="AddressBook" default="distribute" basedir=".">
+<project name="AddressBook" default="buildWeb" basedir=".">
 	<property name="dist" value="dist" />
 	<property name="src" value="src" />
 	<property name="build" value="bin" />
@@ -7,7 +7,7 @@
 	<property name="ftp_user" value="uftp" />
 	<property name="ftp_password" value="zl197941" />
 	<property name="ftp_dir" value="webapps" />
-	<property name="war_file" value="addressbook.war" />
+	<property name="war_file" value="ab.war" />
 	
 	<target name="init">
 		<mkdir dir="${dist}" />

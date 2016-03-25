@@ -17,7 +17,7 @@ public class Address implements Comparable<Address>{
 	private String child1;
 	private String child2;
 	
-	private Address(){	
+	private Address(){
 	}
 	
 	public Address(Date createdDate,String name,String phone,String email,String company,String lover,String child1,String child2){

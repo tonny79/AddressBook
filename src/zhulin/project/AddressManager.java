@@ -20,7 +20,8 @@ public class AddressManager {
 			//throw new ExceptionInInitializerError(ex);
 		}
 	}
-	private static List<Address> addresses=null;
+	private List<Address> addresses=null;
+	private boolean isLogin=false;
 	
 	private void loadAddresses() {
 		// Load the addresses from DB
@@ -60,7 +61,7 @@ public class AddressManager {
 		this.loadAddresses();
 		
 		Address address=new Address(new Date(),name,phone,email,company,lover,child1,child2);
-		AddressManager.addresses.add(address);
+		addresses.add(address);
 		
 		//Save to database
 		try{
@@ -72,5 +73,15 @@ public class AddressManager {
 			System.err.println("Can't save the message to database."+e);
 			e.printStackTrace();
 		}
+	}
+	
+	public void Login(String password){
+		if(password!=null && password.trim().equals("vr715")){
+			this.isLogin=true;
+		}
+	}
+	
+	public boolean isLogin(){
+		return this.isLogin;
 	}
 }
