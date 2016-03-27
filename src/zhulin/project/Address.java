@@ -64,7 +64,7 @@ public class Address implements Comparable<Address>{
 		return this.phone;
 	}
 	
-	private void setPhone(String phone){
+	public void setPhone(String phone){
 		this.phone=phone;
 	}
 	
@@ -72,7 +72,7 @@ public class Address implements Comparable<Address>{
 		return this.email;
 	}
 	
-	private void setEmail(String email){
+	public void setEmail(String email){
 		this.email=email;
 	}
 	
@@ -80,7 +80,7 @@ public class Address implements Comparable<Address>{
 		return this.lover;
 	}
 	
-	private void setLover(String lover){
+	public void setLover(String lover){
 		this.lover=lover;
 	}
 	
@@ -88,7 +88,7 @@ public class Address implements Comparable<Address>{
 		return this.child1;
 	}
 	
-	private void setChild1(String child1){
+	public void setChild1(String child1){
 		this.child1=child1;
 	}
 	
@@ -96,7 +96,7 @@ public class Address implements Comparable<Address>{
 		return this.child2;
 	}
 	
-	private void setChild2(String child2){
+	public void setChild2(String child2){
 		this.child2=child2;
 	}
 	
@@ -104,7 +104,7 @@ public class Address implements Comparable<Address>{
 		return this.company;
 	}
 	
-	private void setCompany(String company){
+	public void setCompany(String company){
 		this.company=company;
 	}
 

@@ -1,5 +1,3 @@
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.text.DateFormat" %>
 <%@ page import="zhulin.project.Address"%>
 <jsp:useBean id="addressManager" scope="session" class="zhulin.project.AddressManager" />
 
@@ -47,61 +45,25 @@ INPUT{
        <input type="password" name="password" size="20" />
        <input type="submit" value="Submit!" />
     </form>
-    <% }else{ %>
-    <h1>Input your info below.Don't use IE please</h1>
-    <%
-      String name=request.getParameter("name");
-      String phone=request.getParameter("phone");
-      String email=request.getParameter("email");
-      String company=request.getParameter("company");
-      String lover=request.getParameter("lover");
-      String child1=request.getParameter("child1");
-      String child2=request.getParameter("child2");
-      if(name!=null&&!name.trim().equals("")){
-    	  addressManager.addAddress(name,phone,email,company,lover,child1,child2);
-      }
+    <% 
+    }else{
+          String name=request.getParameter("name");
+          String phone=request.getParameter("phone");
+          String email=request.getParameter("email");
+          String company=request.getParameter("company");
+          String lover=request.getParameter("lover");
+          String child1=request.getParameter("child1");
+          String child2=request.getParameter("child2");
+          if(name!=null&&!name.trim().equals("")){
+        	//Create a new address or update an existed address
+    	      addressManager.addAddress(name,phone,email,company,lover,child1,child2);
+          }
     %>
-    <form action="am.jsp" method="post">
-      <table border="0">
-        <tr>
-          <td align="left">Name:</td>
-          <td align="left"><input type="text" name="name" size="20" /></td>
-        </tr>
-        <tr>
-          <td align="left">Spouse:</td>
-          <td align="left"><input type="text" name="lover" size="20" /></td>
-        </tr>
-        <tr>
-          <td align="left">Phone:</td>
-          <td align="left"><input type="text" name="phone" size="20" /></td>
-        </tr>
-        <tr>
-          <td align="left">Email:</td>
-          <td align="left"><input type="text" name="email" size="20" /></td>
-        </tr>
-        <tr>
-          <td align="left">Child 1:</td>
-          <td align="left"><input type="text" name="child1" size="20" /></td>
-        </tr>
-        <tr>
-          <td align="left">Child 2:</td>
-          <td align="left"><input type="text" name="child2" size="20" /></td>
-        </tr>
-        <tr>
-          <td align="left">Company:</td>
-          <td align="left"><input type="text" name="company" size="20" /></td>
-        </tr>
-        <tr>
-           <td />
-           <td align="left"><input type="submit" value="Submit!" /></td>
-        </tr>
-      </table>
-    </form>
-    <p />
+    <!-- Display AddressBook -->
+    <h1>Welcome to VR 715 AddressBook!</h1>
     <table border="1">
       <tr>
         <th>ID</th>
-        <th>Created Date</th>
         <th>Name</th>
         <th>Phone</th>
         <th>Email</th>
@@ -109,6 +71,7 @@ INPUT{
         <th>Spouse</th>
         <th>Child 1</th>
         <th>Child 2</th>
+        <th>Created Date</th>
       </tr>
       <%
          Address[] addresses=addressManager.getAddresses();
@@ -117,21 +80,25 @@ INPUT{
       %>  
       <tr>
         <td align="left"><%=addresses[i].getId()%></td>
-        <td align="left"><%=addresses[i].getCreatedDate()%></td>
-        <td align="left"><%=addresses[i].getName()%></td>
+        <td align="left"><a href="amedit.jsp?id=<%=addresses[i].getId()%>"><%=addresses[i].getName()%></a></td>
         <td align="left"><%=addresses[i].getPhone()%></td>
         <td align="left"><%=addresses[i].getEmail()%></td>
         <td align="left"><%=addresses[i].getCompany()%></td>
         <td align="left"><%=addresses[i].getLover()%></td>
         <td align="left"><%=addresses[i].getChild1()%></td>
         <td align="left"><%=addresses[i].getChild2()%></td>
+        <td align="left"><%=addresses[i].getCreatedDate()%></td>
       </tr>
       <%
         }
       %>
-      <%
-        }
-      %>
     </table>
+    <p />
+    <a href="amadd.jsp">Register!</a>
+    <p />
+    <img src="sh2016.jpg" alt="VR715 Latest Picture" />
+    <%
+     }
+    %>
   </body>
 </html>

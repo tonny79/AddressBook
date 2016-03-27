@@ -56,22 +56,66 @@ public class AddressManager {
 		return result;
 	}
 	
+	public Address getAddress(int id){
+		this.loadAddresses();
+		for(Address address:addresses){
+			if(address.getId()==id){
+				return address;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void updateAddress(Address address){
+		org.hibernate.Session session=sessionFactory.getCurrentSession();
+		session.beginTransaction();
+		session.update(address);
+		session.getTransaction().commit();
+	}
+	
+	/*
+	 * Add an address if no name found
+	 * Otherwise will update the address
+	 */
 	public void addAddress(String name,String phone,String email,String company,String lover,String child1,String child2){
 		//Refresh the address book
 		this.loadAddresses();
 		
-		Address address=new Address(new Date(),name,phone,email,company,lover,child1,child2);
-		addresses.add(address);
+		Address address=null;
+		for(Iterator<Address> iter=addresses.iterator();iter.hasNext();){
+			Address temp=iter.next();
+			if(temp.getName().trim().equals(name.trim())){
+				//Found the existed address!
+				address=temp;
+				break;
+			}
+		}
 		
-		//Save to database
-		try{
-		    org.hibernate.Session session=sessionFactory.getCurrentSession();
-		    session.beginTransaction();
-		    session.save(address);
-		    session.getTransaction().commit();
-		}catch(Exception e){
-			System.err.println("Can't save the message to database."+e);
-			e.printStackTrace();
+		if (address == null) {
+			//Create new address
+			address = new Address(new Date(), name, phone, email, company, lover, child1, child2);
+			addresses.add(address);
+
+			// Save to database
+			try {
+				org.hibernate.Session session = sessionFactory.getCurrentSession();
+				session.beginTransaction();
+				session.save(address);
+				session.getTransaction().commit();
+			} catch (Exception e) {
+				System.err.println("Can't save the message to database." + e);
+				e.printStackTrace();
+			}
+		} else {
+			//Update the address
+			address.setPhone(phone);
+			address.setEmail(email);
+			address.setCompany(company);
+			address.setLover(lover);
+			address.setChild1(child1);
+			address.setChild2(child2);
+			this.updateAddress(address);
 		}
 	}
 	
